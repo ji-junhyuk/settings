@@ -1,11 +1,11 @@
-set tabstop=4           "tab 할때 스페이스 갯수"
-set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때, 스페이스 갯수"
-set cindent                     "c스타일 들여쓰기 활성화
-set number                      "라인넘버 표시
-set hidden                      "버퍼 저장하지 않았을 때 경고문 끄기
+set tabstop=4           "tab 할때 스페이스 갯수
+set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때, 스페이스 갯수
+set cindent             "c스타일 들여쓰기 활성화
+set number              "라인넘버 표시
+set hidden              "버퍼 저장하지 않았을 때 경고문 끄기
 set showmatch           "일치하는 괄호 하이라이팅
-set ruler                       "좌하단 행, 열번호 출력
-set vb                          "소리 대신 깜빡임
+set ruler               "좌하단 행, 열번호 출력
+set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
 syntax on
 
