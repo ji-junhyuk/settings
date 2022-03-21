@@ -16,10 +16,6 @@ map <leader>v :set paste<CR>
 map <leader>n :set nopaste<CR>
 map <leader>c :!cat %
 
-nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>bq :bp <BAR> bd #<CR>
-nnoremap <leader>bl :ls<CR>
-
 map <buffer> <F2> :w<CR>
 map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
