@@ -7,6 +7,7 @@ set showmatch           "일치하는 괄호 하이라이팅
 set ruler               "좌하단 행, 열번호 출력
 set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
+filetype plugin on
 syntax on
 
 map <leader>t :tabnew
@@ -93,7 +94,7 @@ let g:vimwiki_list = [
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/_wiki',
+                        \   'path': '/mnt/c/Users/junto/OneDrive/test',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
