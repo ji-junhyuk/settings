@@ -7,6 +7,7 @@ set showmatch           "일치하는 괄호 하이라이팅
 set ruler               "좌하단 행, 열번호 출력
 set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
+set laststatus=2                "상태바 표시
 filetype plugin on
 syntax on
 
@@ -15,7 +16,7 @@ map <leader>q :bnext<CR>
 map <leader>w :bprev<CR>
 map <leader>v :set paste<CR>
 map <leader>n :set nopaste<CR>
-map <leader>c :!cat %
+map <leader>c :!cat %<CR>
 
 map <buffer> <F2> :w<CR>
 map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
@@ -24,6 +25,12 @@ map <buffer> <f5> :!gdb ./a.out<CR>
 
 imap jk <Esc>
 imap kj <Esc>
+
+" 마지막 편집 위치 불러오기
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \ exe "normal g`\"" |
+      \ endif
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -72,18 +79,40 @@ filetype plugin indent on    " required
 
 autocmd BufNewFile 2022*.md call Generate_md()
 function! Generate_md()
-        call append(0, "- [ ] TDL")
-        call append(1, "        - [ ] Vim")
-        call append(2, "                - [ ] task")
-        call append(3, "        - [ ] Routine")
-        call append(4, "                - [ ] 1알고")
-        call append(5, "                        - [ ] task")
-        call append(6, "                - [ ] 1독서")
-        call append(7, "                        - [ ] task")
-        call append(8, "                - [ ] 1시험")
-        call append(9, "                        - [ ] task")
-        call append(10, "       - [ ] Main")
-        call append(11, "               - [ ] main task")
+    let l:template = []
+    call add(l:template, '---')
+    call add(l:template, 'layout  : wiki')
+    call add(l:template, 'title   : ')
+    call add(l:template, 'summary : ')
+    call add(l:template, 'date    : ' . strftime('%Y-%m-%d %H:%M:%S +0900'))
+    call add(l:template, 'updated : ' . strftime('%Y-%m-%d %H:%M:%S +0900'))
+    call add(l:template, 'tag     : ')
+    call add(l:template, 'toc     : true')
+    call add(l:template, 'public  : true')
+    call add(l:template, 'parent  : ')
+    call add(l:template, 'latex   : false')
+    call add(l:template, '---')
+    call add(l:template, '* TOC')
+    call add(l:template, '{:toc}')
+    call add(l:template, '')
+    call add(l:template, '# ')
+        call add(l:template, "- [ ] TDL")
+        call add(l:template, "        - [ ] Vim")
+        call add(l:template, "                - [ ] task")
+        call add(l:template, "        - [ ] Routine")
+        call add(l:template, "                - [ ] 1알고")
+        call add(l:template, "                        - [ ] task")
+        call add(l:template, "                - [ ] 1독서")
+        call add(l:template, "                        - [ ] task")
+        call add(l:template, "                - [ ] 1시험")
+        call add(l:template, "                        - [ ] task")
+        call add(l:template, "       - [ ] Main")
+        call add(l:template, "               - [ ] main task")
+    call setline(1, l:template)
+    execute 'normal! G'
+    execute 'normal! $'
+
+    echom 'new wiki page has created'
 endfunction
 
 let g:vim_wiki_set_path = expand('<sfile>:p:h')
@@ -94,12 +123,12 @@ let g:vimwiki_list = [
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/test',
+                        \   'path': '/mnt/c/Users/junto/OneDrive/diary',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/diary',
+                        \   'path': '/mnt/c/Users/junto/OneDrive/test',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \}
