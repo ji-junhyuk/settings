@@ -1,0 +1,8 @@
+[user]
+	email = takeoutmoneywallet@naver.com
+	name = ji-junhyuk
+[alias]
+	ci = commit
+	co = checkout
+	s = status -s
+	r = restore --staged
