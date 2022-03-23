@@ -1,5 +1,5 @@
 set tabstop=4           "tab 할때 스페이스 갯수
-set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때, 스페이스 갯수
+set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때 스페이스 갯수
 set cindent             "c스타일 들여쓰기 활성화
 set number              "라인넘버 표시
 set hidden              "버퍼 저장하지 않았을 때 경고문 끄기
@@ -12,8 +12,8 @@ filetype plugin on
 syntax on
 
 map <leader>t :tabnew
-map <leader>q :bnext<CR>
-map <leader>w :bprev<CR>
+map <leader>q :bprev<CR>
+map <leader>w :bnext<CR>
 map <leader>v :set paste<CR>
 map <leader>n :set nopaste<CR>
 map <leader>c :!cat %<CR>
@@ -25,6 +25,12 @@ map <buffer> <f5> :!gdb ./a.out<CR>
 
 imap jk <Esc>
 imap kj <Esc>
+
+imap ,fi for (idx = 0; idx < ; ++idx)<ENTER>{<ENTER>}<ESC>O
+imap ,fj for (jdx = 0; jdx < ; ++jdx)<ENTER>{<ENTER>}<ESC>O
+imap ,if if ()<ENTER>{<ENTER>}<ESC>O
+imap ,ef else if ()<ENTER>{<ENTER>}<ESC>O
+imap ,e else<ENTER>{<ENTER>}<ESC>O
 
 " 마지막 편집 위치 불러오기
 autocmd BufReadPost *
@@ -77,6 +83,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+
+augroup todoauto
+    autocmd BufWritePre *.md call UpdateBookProgress()
+augroup END
+
 autocmd BufNewFile 2022*.md call Generate_md()
 function! Generate_md()
     let l:template = []
@@ -123,12 +134,17 @@ let g:vimwiki_list = [
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/diary',
+                        \   'path': '/mnt/c/Users/junto/OneDrive/_diary',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/test',
+                        \   'path': '/mnt/c/Users/junto/OneDrive/_book',
+                        \   'ext' : '.md',
+                        \   'diary_rel_path': '.',
+                        \},
+                        \{
+                        \   'path': '/mnt/c/Users/junto/OneDrive/_test',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \}
@@ -171,7 +187,7 @@ function! LastModified()
         call histdel('search', -1)
         call setpos('.', save_cursor)
     endif
-endfun
+endfunction
 function! NewTemplate()
 
     let l:wiki_directory = v:false
@@ -220,3 +236,5 @@ augroup vimwikiauto
     autocmd FileType vimwiki inoremap <S-Right> <C-r>=vimwiki#tbl#kbd_tab()<CR>
     autocmd FileType vimwiki inoremap <S-Left> <Left><C-r>=vimwiki#tbl#kbd_shift_tab()<CR>
 augroup END
+
+let g:md_modify_disabled = 0
