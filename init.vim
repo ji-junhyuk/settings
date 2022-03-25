@@ -1,3 +1,5 @@
+" PATH ========= ~/.config/nvim/init.vim
+
 set tabstop=4           "tab 할때 스페이스 갯수
 set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때 스페이스 갯수
 set cindent             "c스타일 들여쓰기 활성화
