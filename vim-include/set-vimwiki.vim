@@ -43,22 +43,22 @@ function! Generate_md()
     call add(l:template, '{:toc}')
     call add(l:template, '')
     call add(l:template, '# ')
-    call add(l:template, "- [ ] TDL")
-    call add(l:template, "  - [ ] Routine")
-    call add(l:template, "      - [ ] Algo")
-    call add(l:template, "          - [ ] task")
-    call add(l:template, "      - [ ] Vim")
-    call add(l:template, "          - [ ] task")
-    call add(l:template, "      - [ ] Book")
-    call add(l:template, "          - [ ] task")
-    call add(l:template, "      - [ ] Exam")
-    call add(l:template, "          - [ ] task")
-    call add(l:template, "  - [ ] Main")
-    call add(l:template, "      - [ ] main task")
+        call add(l:template, "- [ ] TDL")
+        call add(l:template, "  - [ ] Routine")
+        call add(l:template, "      - [ ] Algo")
+        call add(l:template, "          - [ ] task")
+        call add(l:template, "      - [ ] Vim")
+        call add(l:template, "          - [ ] task")
+        call add(l:template, "      - [ ] Book")
+        call add(l:template, "          - [ ] task")
+        call add(l:template, "      - [ ] Exam")
+        call add(l:template, "          - [ ] task")
+        call add(l:template, "  - [ ] Main")
+        call add(l:template, "      - [ ] main task")
     call setline(1, l:template)
     execute 'normal! G'
     execute 'normal! $'
-    
+
     echom 'new wiki page has created'
 endfunction
 
@@ -145,6 +145,16 @@ augroup vimwikiauto
     autocmd BufRead,BufNewFile *.md call NewTemplate()
     autocmd FileType vimwiki inoremap <S-Right> <C-r>=vimwiki#tbl#kbd_tab()<CR>
     autocmd FileType vimwiki inoremap <S-Left> <Left><C-r>=vimwiki#tbl#kbd_shift_tab()<CR>
+augroup END
+
+function! UpdateBookProgress()
+    let l:cmd = g:vim_wiki_set_path . "/bookProgressUpdate.sh " . expand('%:p')
+    call system(l:cmd)
+    edit
+endfunction
+
+augroup todoauto
+    autocmd BufWritePost /mnt/c/Users/junto/OneDrive/_book/index.md call UpdateBookProgress()
 augroup END
 
 let g:md_modify_disabled = 0
