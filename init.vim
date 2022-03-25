@@ -25,11 +25,14 @@ map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
 map <buffer> <f5> :!gdb ./a.out<CR>
 
-imap jk <Esc>
-imap kj <Esc>
-
 map <space>p ?(<CR>a
 map <space>; ?;<CR>i
+
+vmap <C-c> <esc>:'<,'>norm i// <CR>
+vmap <C-x> <esc>:'<,'>norm 3x<CR>
+
+imap jk <Esc>
+imap kj <Esc>
 imap ,fi for (idx = 0; idx < ; ++idx)<ENTER>{<ENTER>}<ESC>O
 imap ,fj for (jdx = 0; jdx < ; ++jdx)<ENTER>{<ENTER>}<ESC>O
 imap ,if if ()<ENTER>{<ENTER>}<ESC>O
@@ -38,6 +41,11 @@ imap ,e else<ENTER>{<ENTER>}<ESC>O
 imap ,w while ()<ENTER>{<ENTER>}<ESC>O
 imap ,,, #include <iostream><ENTER>using namespace std;<ENTER><ENTER>int main(void)<ENTER>{<ENTER>ios::sync_with_stdio(false);<ENTER>cin.t
 ie(NULL);<ENTER>}<ESC>O<ENTER>
+
+iabbr <expr> __time strftime("%Y-%m-%d %H:%M:%S")
+iabbr <expr> __file expand('%:p')
+iabbr <expr> __name expand('%')
+iabbr <expr> __pwd expand('%:p:h')
 
 " 마지막 편집 위치 불러오기
 autocmd BufReadPost *
