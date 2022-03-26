@@ -1,6 +1,6 @@
 " PATH ========= ~/.config/nvim/init.vim
 
-set tabstop=4           "tab 할때 스페이스 갯수
+set tabstop=5           "tab 할때 스페이스 갯수
 set shiftwidth=4        ">>, <<키로 들여/내어쓰기 할 때 스페이스 갯수
 set cindent             "c스타일 들여쓰기 활성화
 set number              "라인넘버 표시
@@ -10,9 +10,32 @@ set ruler               "좌하단 행, 열번호 출력
 set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
 set laststatus=2        "상태바 표시
+set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기
+
 filetype plugin on
 syntax on
+colors jellybeans
+set clipboard=unnamedplus
 
+" copy , paste , select 기능 보완 ----------------------
+noremap <Space>y    "+y
+nnoremap <Space>p   "+p
+nnoremap <Space>a   gg<S-v>G
+
+" navigation 기능 보완 ---------------------------------
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+nnoremap <Space>h ^
+nnoremap <Space>l $
+noremap <Space>j 8j
+noremap <Space>k 8k
+nnoremap gjj <PageDown>
+nnoremap gkk <PageUp>
+
+nnoremap <esc><esc> :set hlsearch!<CR>
 map <leader>t :tabnew
 map <leader>q :bprev<CR>
 map <leader>w :bnext<CR>
@@ -23,24 +46,25 @@ map <leader>c :!cat %<CR>
 map <buffer> <F2> :w<CR>
 map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
-map <buffer> <f5> :!gdb ./a.out<CR>
+map <buffer> <F5> :!./a.out<CR>
 
-map <space>p ?(<CR>a
+map <space>pp ?(<CR>a
 map <space>; ?;<CR>i
 
-vmap <C-c> <esc>:'<,'>norm i// <CR>
+vmap <C-p> <esc>:'<,'>norm i// <CR>
 vmap <C-x> <esc>:'<,'>norm 3x<CR>
 
 imap jk <Esc>
 imap kj <Esc>
-imap ,fi for (idx = 0; idx < ; ++idx)<ENTER>{<ENTER>}<ESC>O
-imap ,fj for (jdx = 0; jdx < ; ++jdx)<ENTER>{<ENTER>}<ESC>O
+
+imap ,fi for (int idx = 0; idx < ; ++idx)<ENTER>{<ENTER>}<ESC>O
+imap ,fj for (int jdx = 0; jdx < ; ++jdx)<ENTER>{<ENTER>}<ESC>O
 imap ,if if ()<ENTER>{<ENTER>}<ESC>O
 imap ,ef else if ()<ENTER>{<ENTER>}<ESC>O
 imap ,e else<ENTER>{<ENTER>}<ESC>O
 imap ,w while ()<ENTER>{<ENTER>}<ESC>O
-imap ,,, #include <iostream><ENTER>using namespace std;<ENTER><ENTER>int main(void)<ENTER>{<ENTER>ios::sync_with_stdio(false);<ENTER>cin.t
-ie(NULL);<ENTER>}<ESC>O<ENTER>
+imap ,,, #include <iostream><ENTER>using namespace std;<ENTER><ENTER>int main(void)<ENTER>{<ENTER>ios::sync_with_stdio(false);<ENTER>cin.tie(NULL);<ENTER>}<ESC>O<ENTER>
+imap ,`` ```c++<ENTER>```<ESC>O
 
 iabbr <expr> __time strftime("%Y-%m-%d %H:%M:%S")
 iabbr <expr> __file expand('%:p')
