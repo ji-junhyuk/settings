@@ -15,7 +15,6 @@ set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기
 filetype plugin on
 syntax on
 colors jellybeans
-set clipboard=unnamedplus
 
 " copy , paste , select 기능 보완 ----------------------
 noremap <Space>y    "+y
@@ -23,9 +22,7 @@ nnoremap <Space>p   "+p
 nnoremap <Space>a   gg<S-v>G
 
 " navigation 기능 보완 ---------------------------------
-nnoremap k gk
 nnoremap gk k
-nnoremap j gj
 nnoremap gj j
 
 nnoremap <Space>h ^
@@ -96,6 +93,7 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 Plug 'preservim/tagbar'
 Plug 'nanotech/jellybeans.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
