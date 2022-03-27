@@ -1,1 +1,1 @@
-nmap<F8> :TagbarToggle<CR>
+nnoremap <LocalLeader>r :TagbarToggle<CR>
