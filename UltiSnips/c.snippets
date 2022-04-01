@@ -2,19 +2,10 @@ snippet # "#include"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-${0}
 endsnippet
 
 snippet pf "printf"
 printf("${1}\n", ${2});
-endsnippet
-
-snippet main "argc"
-int main(int argc, char *argv[])
-{
-    ${1}
-    return (0);
-}
 endsnippet
 
 snippet re "return"
@@ -32,11 +23,8 @@ while (${1})
 }
 endsnippet
 
-snippet fun "function"
-${1:void}${2}${3:function_name}(${4})
-{
-    ${5}
-}
+snippet br "break"
+break ;
 endsnippet
 
 snippet if "if"
@@ -56,6 +44,19 @@ for (int idx = ${1:0}; idx < ${2}; ++idx)
 }
 endsnippet
 
+snippet fun "func"
+/*! \brief ${5:Brief function description here}
+*
+*  ${6:Detailed description}
+*
+* \return ${7:Return parameter description}
+*/
+${1:void}${2}${3:function_name)($4)
+{
+    ${8}
+}
+endsnippet
+
 snippet ef "else if"
 else if (${1})
 {
@@ -71,10 +72,10 @@ else
 endsnippet
 
 snippet st "struct"
-typedef struct ${1}
+struct ${1}
 {
     ${2}
-}   ${3}
+}
 endsnippet
 
 snippet todo
