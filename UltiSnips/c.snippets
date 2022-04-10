@@ -1,7 +1,18 @@
+snippet head "header"
+# ifndef
+# define ${1:FT_H}
+${2}
+#endif
+endsnippet
+
 snippet # "#include"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+endsnippet
+
+snippet INT_MIN "INT_MIN"
+-2147483648
 endsnippet
 
 snippet pf "printf"
@@ -44,16 +55,10 @@ for (int idx = ${1:0}; idx < ${2}; ++idx)
 }
 endsnippet
 
-snippet fun "func"
-/*! \brief ${5:Brief function description here}
-*
-*  ${6:Detailed description}
-*
-* \return ${7:Return parameter description}
-*/
-${1:void}${2}${3:function_name)($4)
+snippet ef "else if"
+else if (${1})
 {
-    ${8}
+    ${2}
 }
 endsnippet
 
@@ -71,21 +76,25 @@ else
 }
 endsnippet
 
-snippet st "struct"
-struct ${1}
+snippet fun "func"
+${1:void}${2}${3:function_name}(${4})
 {
-    ${2}
+    ${5}
 }
 endsnippet
 
-snippet enum "enum"                                                                                                                         
-/*!                                                                                                                                         
- *  ${3:Detailed description}                                                                                                               
- */                                                                                                                                         
-enum ${1:name}                                                                                                                              
-{                                                                                                                                           
-    ${2}                                                                                                                                    
-};                                                                                                                                          
+snippet enum "enum"
+typedef enum ${1}
+{
+    ${2}
+}   t_${3:name};
+endsnippet
+
+snippet st "struct"
+typedef struct ${1}
+{
+    ${2}
+}   t_${3:name};
 endsnippet
 
 snippet todo
