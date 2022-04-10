@@ -11,6 +11,8 @@ set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
 set laststatus=2        "상태바 표시
 set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기
+set noswapfile
+set nobackup
 
 filetype plugin on
 syntax on
@@ -33,6 +35,7 @@ nnoremap gjj <PageDown>
 nnoremap gkk <PageUp>
 
 nnoremap <esc><esc> :set hlsearch!<CR>
+nnoremap <leader><leader><space> :set number!<CR>
 map <leader>t :tabnew
 map <leader>q :bprev<CR>
 map <leader>w :bnext<CR>
@@ -53,15 +56,6 @@ vmap <C-x> <esc>:'<,'>norm 3x<CR>
 
 imap jk <Esc>
 imap kj <Esc>
-
-imap ,fi for (int idx = 0; idx < ; ++idx)<ENTER>{<ENTER>}<ESC>O
-imap ,fj for (int jdx = 0; jdx < ; ++jdx)<ENTER>{<ENTER>}<ESC>O
-imap ,if if ()<ENTER>{<ENTER>}<ESC>O
-imap ,ef else if ()<ENTER>{<ENTER>}<ESC>O
-imap ,e else<ENTER>{<ENTER>}<ESC>O
-imap ,w while ()<ENTER>{<ENTER>}<ESC>O
-imap ,,, #include <iostream><ENTER>using namespace std;<ENTER><ENTER>int main(void)<ENTER>{<ENTER>ios::sync_with_stdio(false);<ENTER>cin.tie(NULL);<ENTER>}<ESC>O<ENTER>
-imap ,`` ```c++<ENTER>```<ESC>O
 
 iabbr <expr> __time strftime("%Y-%m-%d %H:%M:%S")
 iabbr <expr> __file expand('%:p')
