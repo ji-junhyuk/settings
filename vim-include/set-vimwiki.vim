@@ -1,22 +1,27 @@
 let g:vim_wiki_set_path = expand('<sfile>:p:h')
 let g:vimwiki_list = [
                         \{
-                        \   'path': '~/ji-junhyuk.github.io/_wiki',
+                        \   'path': '~/diary/_diary',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/_diary',
+                        \   'path': '~/diary/_test',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/_book',
+                        \   'path': '~/diary/_book',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \},
                         \{
-                        \   'path': '/mnt/c/Users/junto/OneDrive/_test',
+                        \   'path': '~/diary/_writing',
+                        \   'ext' : '.md',
+                        \   'diary_rel_path': '.',
+                        \},
+                        \{
+                        \   'path': '~/diary/_status',
                         \   'ext' : '.md',
                         \   'diary_rel_path': '.',
                         \}
