@@ -119,6 +119,5 @@ fi
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
 
-alias cdt="cd /mnt/c/Users/junto/OneDrive/test"
-alias blog="bundle exec jekyll serve"
-alias mvi="mv ~/settings/vim-include ~/.vim/"
+export "USER=junji"
+export "MAIL="$USER@student.42.kr""
