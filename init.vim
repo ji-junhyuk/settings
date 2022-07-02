@@ -6,13 +6,14 @@ set cindent             "c스타일 들여쓰기 활성화
 set number              "라인넘버 표시
 set hidden              "버퍼 저장하지 않았을 때 경고문 끄기
 set showmatch           "일치하는 괄호 하이라이팅
-set ruler               "좌하단 행, 열번호 출력
-set vb                  "소리 대신 깜빡임
+set ruler               "좌하단 행, 열번호 출력 set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
 set laststatus=2        "상태바 표시
-set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기
-set noswapfile
+set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기 
+set noswapfile 
 set nobackup
+
+silent! w ~/diary
 
 filetype plugin on
 syntax on
@@ -43,7 +44,7 @@ map <leader>v :set paste<CR>
 map <leader>n :set nopaste<CR>
 map <leader>c :!cat %<CR>
 
-map <buffer> <F2> :w<CR>
+map <buffer> <F2> :w!<CR>
 map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F5> :!./a.out<CR>
@@ -51,8 +52,8 @@ map <buffer> <F5> :!./a.out<CR>
 map <space>pp ?(<CR>a
 map <space>; ?;<CR>i
 
-vmap <C-p> <esc>:'<,'>norm i// <CR>
-vmap <C-x> <esc>:'<,'>norm 3x<CR>
+vmap <C-_> <esc>:'<,'>norm i//<CR>
+vmap <C-x> <esc>:'<,'>norm 2x<CR>
 
 imap jk <Esc>
 imap kj <Esc>
@@ -67,6 +68,9 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \ exe "normal g`\"" |
       \ endif
+
+let g:auto_save = 1
+set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
 
 " plugin별로 setting 불러오기
 for include_file in uniq(sort(globpath(&rtp, 'vim-include/*.vim', 0, 1)))
@@ -86,8 +90,11 @@ call plug#begin()
 
 Plug 'vimwiki/vimwiki'
 Plug 'preservim/tagbar'
-Plug 'nanotech/jellybeans.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'nanotech/jllybeans.vim'
+Plug '907th/vim-auto-save'
+Plug 'vim-airline/vim-airline'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -96,7 +103,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips' 
+" Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -115,7 +123,7 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
 " Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
+Plug '42Paris/42header'
 
 " Initialize plugin system
 call plug#end()
