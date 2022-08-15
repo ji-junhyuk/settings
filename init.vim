@@ -9,15 +9,17 @@ set showmatch           "일치하는 괄호 하이라이팅
 set ruler               "좌하단 행, 열번호 출력 set vb                  "소리 대신 깜빡임
 set history=1000        "vi 편집 기록 갯수(.viminfo)
 set laststatus=2        "상태바 표시
-set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기 
-set noswapfile 
+set nohlsearch           "일치하는 단어 검색 시 강조표시 끄기
+set noswapfile
 set nobackup
-
-silent! w ~/diary
+set encoding=UTF-8
 
 filetype plugin on
 syntax on
 colors jellybeans
+
+
+hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
 " copy , paste , select 기능 보완 ----------------------
 noremap <Space>y    "+y
@@ -43,10 +45,14 @@ map <leader>w :bnext<CR>
 map <leader>v :set paste<CR>
 map <leader>n :set nopaste<CR>
 map <leader>c :!cat %<CR>
+map <leader>m :MarkdownPreview<CR>
 
 map <buffer> <F2> :w!<CR>
-map <buffer> <F3> :!gcc -Wall -Werror -Wextra -g %<CR>
-map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
+map <buffer> <F3> :!norminette -R CheckForbiddenceSourceHeader %<CR>
+" map <buffer> <F4> :!gcc -Wall -Werror -Wextra -g %<CR>
+map <buffer> <F4> :!gcc -Wall -Werror -Wextra -g *.c<CR>
+
+" map <buffer> <F4> :!g++ -Wall -Werror -Wextra -g %<CR>
 map <buffer> <F5> :!./a.out<CR>
 
 map <space>pp ?(<CR>a
@@ -63,14 +69,14 @@ iabbr <expr> __file expand('%:p')
 iabbr <expr> __name expand('%')
 iabbr <expr> __pwd expand('%:p:h')
 
+let g:user42 = "junji"
+let g:mail42 = "junji@student.42.fr"
+
 " 마지막 편집 위치 불러오기
 autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \ exe "normal g`\"" |
       \ endif
-
-let g:auto_save = 1
-set langmap=ㅁa,ㅠb,ㅊc,ㅇd,ㄷe,ㄹf,ㅎg,ㅗh,ㅑi,ㅓj,ㅏk,ㅣl,ㅡm,ㅜn,ㅐo,ㅔp,ㅂq,ㄱr,ㄴs,ㅅt,ㅕu,ㅍv,ㅈw,ㅌx,ㅛy,ㅋz
 
 " plugin별로 setting 불러오기
 for include_file in uniq(sort(globpath(&rtp, 'vim-include/*.vim', 0, 1)))
@@ -90,11 +96,13 @@ call plug#begin()
 
 Plug 'vimwiki/vimwiki'
 Plug 'preservim/tagbar'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
-Plug 'nanotech/jllybeans.vim'
-Plug '907th/vim-auto-save'
 Plug 'vim-airline/vim-airline'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'pbondoer/vim-42header'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug '907th/vim-auto-save'
+
+Plug 'ryanoasis/vim-devicons'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -103,8 +111,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
 " Multiple Plug commands can be written in a single line using | separators
-Plug 'SirVer/ultisnips' 
-" Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -122,8 +130,7 @@ Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-" Unmanaged plugin (manually installed and updated)
-Plug '42Paris/42header'
-
 " Initialize plugin system
 call plug#end()
+
+let g:auto_save = 1  " enable AutoSave on Vim startup
